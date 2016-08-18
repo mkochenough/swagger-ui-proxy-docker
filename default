@@ -1,0 +1,19 @@
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        root /app/htmo;
+
+        index index.html;
+
+        server_name _;
+
+        location ^~ /swagger {
+                alias /app/html/swagger;
+        }
+
+        location / {
+                proxy_pass %PROXY_TARGET% ;
+        }
+}
+
